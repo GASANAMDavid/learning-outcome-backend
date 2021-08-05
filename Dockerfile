@@ -1,11 +1,11 @@
 FROM ruby:3.0.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir /docker-learning-outcome
-WORKDIR /docker-learning-outcome
-COPY Gemfile /docker-learning-outcome/Gemfile
-COPY Gemfile.lock /docker-learning-outcome/Gemfile.lock
+RUN mkdir /learning-outcome-app-backend
+WORKDIR /learning-outcome-app-backend
+COPY Gemfile /learning-outcome-app-backend/Gemfile
+COPY Gemfile.lock /learning-outcome-app-backend/Gemfile.lock
 RUN bundle install
-COPY . /docker-learning-outcome/
+COPY . /learning-outcome-app-backend/
 
 # Add a script to be executed every time the container starts.
 COPY /bin/entrypoint.sh /usr/bin/
