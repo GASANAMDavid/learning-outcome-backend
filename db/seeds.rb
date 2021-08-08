@@ -122,10 +122,26 @@ themes = [
   }
 ]
 
+apprenticeship_levels = [
+  {
+    title: 'Apprentice Level 1',
+  },
+  {
+    title: 'Apprentice Level 2',
+  },
+  {
+    title: 'Apprenticeship Stretch Goals',
+  }
+]
+
 skills_levels.each do |skill_level|
   SkillsLevel.create(skill_level)
 end
 
 themes.each do |theme|
   Theme.create(theme)
+end
+
+apprenticeship_levels.each do |apprenticeship_level|
+  ApprenticeshipLevel.create(apprenticeship_level)
 end

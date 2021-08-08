@@ -1,0 +1,2 @@
+class ApprenticeshipLevel < ApplicationRecord
+end

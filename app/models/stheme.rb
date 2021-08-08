@@ -1,0 +1,2 @@
+class Stheme < ApplicationRecord
+end
