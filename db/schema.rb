@@ -10,27 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_807_200_259) do
+ActiveRecord::Schema.define(version: 2021_08_08_062906) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'apprenticeship_levels', force: :cascade do |t|
-    t.string 'title'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "apprenticeship_levels", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'skills_levels', force: :cascade do |t|
-    t.text 'description'
-    t.string 'color'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "skills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.boolean "display", default: true
+    t.bigint "skills_level_id", null: false
+    t.bigint "theme_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["skills_level_id"], name: "index_skills_on_skills_level_id"
+    t.index ["theme_id"], name: "index_skills_on_theme_id"
   end
 
-  create_table 'themes', force: :cascade do |t|
-    t.string 'title'
-    t.string 'link'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "skills_levels", force: :cascade do |t|
+    t.text "description"
+    t.string "color"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "skills", "skills_levels"
+  add_foreign_key "skills", "themes"
 end
