@@ -27,6 +27,3 @@
 /config/master.key
 /.env*
 structure.*
-new_id_rsa
-new_id_rsa.pub
-learning_outcome_app_keypair.pem
