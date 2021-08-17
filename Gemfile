@@ -19,6 +19,8 @@ gem 'rswag'
 gem 'rswag-api'
 gem 'rswag-ui'
 
+gem 'rspec-core'
+
 gem 'rack-cors'
 
 group :development, :test do
