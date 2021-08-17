@@ -10,9 +10,18 @@ gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 gem 'rubocop'
 
+gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
+
+gem 'rack-cors'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', '~> 5.0.0'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'rswag-specs'
+  gem 'shoulda-matchers'
 end
 
 group :development do
