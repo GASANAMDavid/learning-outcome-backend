@@ -6,6 +6,7 @@ require 'capistrano-db-tasks'
 set :application, 'learning-outcome-app'
 set :repo_url, 'git@github.com:GASANAMDavid/learning-outcome-backend.git'
 set :deploy_to, '/home/deploy/learning-outcome-app'
+set :default_env, { MAX_EXECUTION_TIME: "90000" }
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 set :linked_files, %w{config/database.yml config/master.key}
