@@ -20,4 +20,4 @@ production:
   <<: *default
   database: learning_outcome_app_production
   username: deploy
-  password: 
+  password: password

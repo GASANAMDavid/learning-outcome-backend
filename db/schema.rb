@@ -1,6 +1,5 @@
-
-ActiveRecord::Schema.define(version: 20_210_808_062_906) do
-  
+ActiveRecord::Schema.define(version: 20_210_808_044_708) do
+  enable_extension 'pgcrypto'
   enable_extension 'plpgsql'
 
   create_table 'apprenticeship_levels', force: :cascade do |t|
