@@ -1,3 +1,7 @@
+require 'database_cleaner'
+
+DatabaseCleaner.clean_with(:truncation)
+
 skills_levels = [
   {
     description: 'Default',
@@ -145,31 +149,26 @@ skills = [
     title: 'Nested Feedback Loops'
   },
   {
-    id: '04d8386a-c84a-4f8b-8c78-4fe82f4f896a',
     apprenticeship_level_id: '2',
     theme_id: '1',
     title: 'Test Smells and Testing Tradeoffs'
   },
   {
-    id: '417d45f3-ef04-4cb4-824d-3a56c9edbe18',
     apprenticeship_level_id: '3',
     theme_id: '1',
     title: 'Inside-Out and Outside-In Development'
   },
   {
-    id: '65fb7533-803c-46ab-823c-8b0bd283f972',
     apprenticeship_level_id: '3',
     theme_id: '1',
     title: 'Fixture Setup Patterns'
   },
   {
-    id: '09eb997e-9a7c-4c66-a0ba-3b1a854e25f6',
     apprenticeship_level_id: '1',
     theme_id: '2',
     title: 'Staying Green While Refactoring'
   },
   {
-    id: 'e1c91158-da61-455b-8df2-9ff6a36737c5',
     apprenticeship_level_id: '1',
     theme_id: '2',
     title: 'Identifying Code Smells'
@@ -690,7 +689,6 @@ skills = [
     title: 'Adapting to Local Norms and Styles'
   },
   {
-    id: '174604c2-3df9-41d0-97a6-d3cfe9be14cb',
     apprenticeship_level_id: '2',
     theme_id: '13',
     title: 'Empathy for Why Certain Decisions Were Made'

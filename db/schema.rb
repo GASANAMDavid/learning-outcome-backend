@@ -1,5 +1,4 @@
 ActiveRecord::Schema.define(version: 20_210_808_044_708) do
-  enable_extension 'pgcrypto'
   enable_extension 'plpgsql'
 
   create_table 'apprenticeship_levels', force: :cascade do |t|
@@ -8,7 +7,7 @@ ActiveRecord::Schema.define(version: 20_210_808_044_708) do
     t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table 'skills', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+  create_table 'skills', force: :cascade do |t|
     t.string 'title'
     t.boolean 'display', default: true
     t.bigint 'apprenticeship_level_id', null: false

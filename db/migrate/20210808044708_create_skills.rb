@@ -1,7 +1,6 @@
 class CreateSkills < ActiveRecord::Migration[6.1]
   def change
-    enable_extension 'pgcrypto' unless extension_enabled?('pgcrypto')
-    create_table :skills, id: :uuid, default: 'gen_random_uuid()' do |t|
+    create_table :skills do |t|
       t.string :title
       t.boolean :display, default: true
       t.references :apprenticeship_level, null: false, foreign_key: true
