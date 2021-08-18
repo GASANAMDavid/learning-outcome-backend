@@ -26,12 +26,12 @@ end
 
 group :development do
   gem 'capistrano', require: false
+  gem 'capistrano-db-tasks', require: false
   gem 'capistrano-rails', require: false
-  gem 'capistrano-rbenv'  
-  gem 'capistrano-db-tasks'
-  gem 'web-console'
+  gem 'capistrano-rbenv'
   gem 'listen', '~> 3.3'
   gem 'spring'
   gem 'spring-watcher-listen'
+  gem 'web-console'
 end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
