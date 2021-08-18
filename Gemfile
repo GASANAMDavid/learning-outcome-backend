@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -8,7 +10,10 @@ gem 'dotenv-rails'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
+
 gem 'rubocop'
+gem 'rubocop-rails'
+gem 'rubocop-rspec'
 
 gem 'rswag'
 gem 'rswag-api'
