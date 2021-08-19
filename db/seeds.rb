@@ -1070,6 +1070,22 @@ skills = [
 
 ]
 
+roles = [
+  {
+    name: 'apprentice',
+    info: 'An apprentice is trained to write and test code, working in a professional development environment, and using software development frameworks and methodologies'
+  }
+]
+
+users = [
+  {
+    first_name: 'David',
+    last_name: 'Manzi',
+    email: 'david.manzi@oneworldcoders.com',
+    role_id: 1
+  }
+]
+
 skills_levels.each do |skill_level|
   SkillsLevel.create(skill_level)
 end
@@ -1084,4 +1100,12 @@ end
 
 skills.each do |skill|
   Skill.create(skill)
+end
+
+roles.each do |role|
+  Role.create(role)
+end
+
+users.each do |user|
+  User.create(user)
 end
