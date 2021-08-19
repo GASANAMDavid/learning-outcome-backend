@@ -19,8 +19,8 @@ gem 'rswag'
 gem 'rswag-api'
 gem 'rswag-ui'
 
-gem 'rspec-core'
 gem 'database_cleaner'
+gem 'rspec-core'
 
 gem 'rack-cors'
 gem 'rake', '~> 13.0', '>= 13.0.6'

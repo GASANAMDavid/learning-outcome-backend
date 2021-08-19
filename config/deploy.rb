@@ -10,7 +10,7 @@ set :repo_url, 'git@github.com:GASANAMDavid/learning-outcome-backend.git'
 set :deploy_to, '/home/deploy/learning-outcome-app'
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
-set :linked_files, %w{config/database.yml config/master.key}
+set :linked_files, %w[config/database.yml config/master.key]
 set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system]
 
 set :keep_releases, 3
@@ -23,6 +23,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
+      execute :rake, 'db:seed'
     end
   end
 
