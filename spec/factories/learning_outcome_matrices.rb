@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :leaning_outcome_matrix do
+  factory :learning_outcome_matrix do
     user { nil }
     skill { nil }
     skills_level { nil }

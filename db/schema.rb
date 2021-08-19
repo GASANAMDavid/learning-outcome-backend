@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_19_055225) do
+ActiveRecord::Schema.define(version: 2021_08_19_102207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,15 +21,15 @@ ActiveRecord::Schema.define(version: 2021_08_19_055225) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "leaning_outcome_matrices", force: :cascade do |t|
+  create_table "learning_outcome_matrices", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
     t.bigint "skills_level_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["skill_id"], name: "index_leaning_outcome_matrices_on_skill_id"
-    t.index ["skills_level_id"], name: "index_leaning_outcome_matrices_on_skills_level_id"
-    t.index ["user_id"], name: "index_leaning_outcome_matrices_on_user_id"
+    t.index ["skill_id"], name: "index_learning_outcome_matrices_on_skill_id"
+    t.index ["skills_level_id"], name: "index_learning_outcome_matrices_on_skills_level_id"
+    t.index ["user_id"], name: "index_learning_outcome_matrices_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 2021_08_19_055225) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
-  add_foreign_key "leaning_outcome_matrices", "skills"
-  add_foreign_key "leaning_outcome_matrices", "skills_levels"
-  add_foreign_key "leaning_outcome_matrices", "users"
+  add_foreign_key "learning_outcome_matrices", "skills"
+  add_foreign_key "learning_outcome_matrices", "skills_levels"
+  add_foreign_key "learning_outcome_matrices", "users"
   add_foreign_key "skills", "apprenticeship_levels"
   add_foreign_key "skills", "themes"
   add_foreign_key "users", "roles"
