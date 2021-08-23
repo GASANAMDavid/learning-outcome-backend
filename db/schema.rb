@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20_210_823_041_117) do
+ActiveRecord::Schema.define(version: 20_210_823_050_032) do
   enable_extension 'plpgsql'
 
   create_table 'apprenticeship_levels', force: :cascade do |t|
@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(version: 20_210_823_041_117) do
     t.bigint 'skills_level_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.index ['skill_id'], name: 'index_learning_outcome_matrices_on_skill_id'
+    t.index ['skill_id'], name: 'index_learning_outcome_matrices_on_skill_id', unique: true
     t.index ['skills_level_id'], name: 'index_learning_outcome_matrices_on_skills_level_id'
     t.index ['user_id'], name: 'index_learning_outcome_matrices_on_user_id'
   end
