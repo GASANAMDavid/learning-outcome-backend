@@ -1,4 +1,6 @@
-ActiveRecord::Schema.define(version: 20_210_823_053_820) do
+# frozen_string_literal: true
+
+ActiveRecord::Schema.define(version: 20_210_824_035_427) do
   enable_extension 'plpgsql'
 
   create_table 'apprenticeship_levels', force: :cascade do |t|
@@ -20,7 +22,7 @@ ActiveRecord::Schema.define(version: 20_210_823_053_820) do
 
   create_table 'roles', force: :cascade do |t|
     t.string 'name'
-    t.string 'info'
+    t.string 'description'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end
@@ -69,7 +71,6 @@ ActiveRecord::Schema.define(version: 20_210_823_053_820) do
     t.text 'object'
     t.bigint 'user_id', null: false
     t.datetime 'created_at'
-    t.text 'object_changes'
     t.index %w[item_type item_id], name: 'index_versions_on_item_type_and_item_id'
   end
 
