@@ -14,14 +14,14 @@ RSpec.describe GenerateMatrix do
     create(:learning_outcome_matrix, skill: skill, user: user, skills_level: skills_level)
   end
 
-  it 'generates a list of learning outcomes' do
-    learning_outcomes = GenerateMatrix.info([learning_outcome_matrix])
+  it 'generates a list of learning outcomes with user skills_levels' do
+    learning_outcomes = GenerateMatrix.data([learning_outcome_matrix])
 
     expect(learning_outcomes).to eq(
       [
         {
           id: learning_outcome_matrix.id,
-          theme: theme.title,
+          theme: { title: theme.title, link: theme.link },
           learning_outcome: skill.title,
           skills_level: skills_level.id,
           apprenticeship_level: apprenticeship_level.id

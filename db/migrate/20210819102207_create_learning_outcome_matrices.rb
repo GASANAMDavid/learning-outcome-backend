@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLearningOutcomeMatrices < ActiveRecord::Migration[6.1]
   def change
     create_table :learning_outcome_matrices do |t|

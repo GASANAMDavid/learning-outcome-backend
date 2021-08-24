@@ -22,16 +22,25 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
     end
 
     it 'returns the current learning outcome matrix for a user' do
-      expect(response.parsed_body['matrix']['data']).to eq(
-        [
-          {
-            'id' => learning_outcome_matrix.id,
-            'theme' => theme.title,
-            'learning_outcome' => skill.title,
-            'skills_level' => skills_level.id,
-            'apprenticeship_level' => apprenticeship_level.id
-          }
-        ]
+      expect(response.parsed_body['matrix']).to eq(
+        {
+          'skill_level_options' => [
+            {
+              'id' => skills_level.id,
+              'description' => skills_level.description,
+              'color' => skills_level.color
+            }
+          ],
+          'data' => [
+            {
+              'id' => learning_outcome_matrix.id,
+              'theme' => { 'title' => theme.title, 'link' => theme.link },
+              'learning_outcome' => skill.title,
+              'skills_level' => skills_level.id,
+              'apprenticeship_level' => apprenticeship_level.id
+            }
+          ]
+        }
       )
     end
   end

@@ -5,7 +5,8 @@ class LearningOutcomeMatrixController < ApplicationController
 
   def index
     matrix = LearningOutcomeMatrix.user_matrix(current_user)
-    records = GenerateMatrix.info(matrix)
-    render json: { matrix: { data: records } }, status: :ok
+    records = GenerateMatrix.data(matrix)
+    skill_level_options = GenerateSkillLevel.options
+    render json: { matrix: { data: records, skill_level_options: skill_level_options } }, status: :ok
   end
 end

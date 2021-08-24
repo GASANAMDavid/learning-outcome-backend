@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateVersions < ActiveRecord::Migration[6.1]
   TEXT_BYTES = 1_073_741_823
 

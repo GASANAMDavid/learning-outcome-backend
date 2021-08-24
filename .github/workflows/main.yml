@@ -11,7 +11,7 @@ jobs:
         image: postgres:13
         env:
           POSTGRES_USER: ENV['POSTGRES_USER']
-          POSTGRES_DB: ENV['TICTACTOE_DATABASE_URL']
+          POSTGRES_DB: ENV['DATABASE_URL']
           POSTGRES_PASSWORD: ENV['POSTGRES_PASSWORD']
         ports: ["5432:5432"]
         options: >-
