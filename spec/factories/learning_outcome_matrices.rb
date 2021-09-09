@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :learning_outcome_matrix do
-    user { nil }
-    skill { nil }
-    skills_level { nil }
+    user
+    skill
+    skills_level
   end
 end

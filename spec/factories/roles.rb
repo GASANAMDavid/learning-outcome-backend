@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :role do
-    name { "MyString" }
-    info { "MyString" }
+    name { 'apprentice' }
+    description { 'Some kind of info about a role' }
   end
 end

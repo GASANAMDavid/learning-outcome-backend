@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'database_cleaner'
 
 DatabaseCleaner.clean_with(:truncation)
@@ -1073,7 +1075,7 @@ skills = [
 roles = [
   {
     name: 'apprentice',
-    info: 'An apprentice is trained to write and test code, working in a professional development environment, and using software development frameworks and methodologies'
+    description: 'An apprentice is trained to write and test code, working in a professional development environment, and using software development frameworks and methodologies'
   }
 ]
 

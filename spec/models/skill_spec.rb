@@ -3,5 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Skill, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of(:title) }
+  it { should belong_to(:theme) }
+  it { should belong_to(:apprenticeship_level) }
 end
