@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-desc 'drops the db, creates a new db, run migrations, seed the tables and sets initial users learning outcome matrix'
-task setup: [:environment, 'db:drop', 'db:create', 'db:migrate', 'db:seed'] do
+desc 'seed the tables and sets initial users learning outcome matrix'
+task setup: [:environment, 'db:seed'] do
   Rake::Task['initialize_users_matrix'].invoke if Rails.env.development?
 end
 
