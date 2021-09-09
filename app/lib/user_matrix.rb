@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserMatrix
   def self.for(user)
     LearningOutcomeMatrix.includes(:user, { skill: %i[theme apprenticeship_level] },

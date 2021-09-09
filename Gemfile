@@ -29,6 +29,7 @@ gem 'rake', '~> 13.0', '>= 13.0.6'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'pry'
   gem 'rspec-rails'
   gem 'rswag-specs'
   gem 'shoulda-matchers'

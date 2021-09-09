@@ -9,4 +9,13 @@ class LearningOutcomeMatrixController < ApplicationController
     skill_level_options = GenerateSkillLevel.options
     render json: { matrix: { data: records, skill_level_options: skill_level_options } }, status: :ok
   end
+
+  def update
+    new_matrix = params[:matrix]
+    matrix = UserMatrix.for(current_user)
+    new_matrix.each do |abc|
+      matrix.find(abc[:id]).update!(skills_level_id: abc[:skills_level_id])
+    end
+    render json: { message: 'updated successfully' }, status: 204
+  end
 end

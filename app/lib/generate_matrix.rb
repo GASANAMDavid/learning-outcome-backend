@@ -2,13 +2,13 @@
 
 class GenerateMatrix
   def self.data(matrix)
-    matrix.map do |skill_record|
+    matrix.map do |learning_outcome|
       {
-        id: skill_record.id,
-        learning_outcome: skill_record.skill.title,
-        skills_level: skill_record.skills_level.id,
-        theme: { title: skill_record.skill.theme.title, link: skill_record.skill.theme.link },
-        apprenticeship_level: skill_record.skill.apprenticeship_level.id
+        id: learning_outcome.id,
+        learning_outcome: learning_outcome.skill.title,
+        skills_level: learning_outcome.skills_level.id,
+        theme: { title: learning_outcome.skill.theme.title, link: learning_outcome.skill.theme.link },
+        apprenticeship_level: learning_outcome.skill.apprenticeship_level.id
       }
     end
   end
