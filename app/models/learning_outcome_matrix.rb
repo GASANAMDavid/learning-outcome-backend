@@ -6,9 +6,4 @@ class LearningOutcomeMatrix < ApplicationRecord
   belongs_to :skills_level
 
   has_paper_trail ignore: %i[skill_id user_id], meta: { user_id: :user_id }
-
-  def self.user_matrix(user)
-    LearningOutcomeMatrix.includes(:user, { skill: %i[theme apprenticeship_level] },
-                                   :skills_level).where(user_id: user.id)
-  end
 end
