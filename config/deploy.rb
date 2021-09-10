@@ -23,8 +23,6 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
-      run "cd #{deploy_to}/current"
-      run 'bundle exec rake setup RAILS_ENV=production'
     end
   end
 
