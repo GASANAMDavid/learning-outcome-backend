@@ -7,23 +7,28 @@ DatabaseCleaner.clean_with(:truncation)
 skills_levels = [
   {
     description: 'Default',
+    display: '',
     color: 'white'
   },
   {
-    description: 'I can give a definition or example of this outcome. I feel comfortable utilizing this outcome on a project with little to no guidance.',
-    color: 'green'
-  },
-  {
-    description: 'I can give a definition or example of this outcome. I feel comfortable utilizing this outcome on a project, however I would require guidance.',
-    color: 'yellow'
+    description: 'I have never heard of this.',
+    display: '1',
+    color: 'red'
   },
   {
     description: 'I have heard of this outcome, however I do not feel comfortable utilizing it on a project.',
+    display: '2',
     color: 'orange'
   },
   {
-    description: 'I have never heard of this.',
-    color: 'red'
+    description: 'I can give a definition or example of this outcome. I feel comfortable utilizing this outcome on a project, however I would require guidance.',
+    display: '3',
+    color: 'yellow'
+  },
+  {
+    description: 'I can give a definition or example of this outcome. I feel comfortable utilizing this outcome on a project with little to no guidance.',
+    display: '4',
+    color: 'green'
   }
 ]
 

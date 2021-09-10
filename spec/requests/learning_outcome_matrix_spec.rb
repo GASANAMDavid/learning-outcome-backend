@@ -22,7 +22,8 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
           {
             'id' => skills_level.id,
             'description' => skills_level.description,
-            'color' => skills_level.color
+            'color' => skills_level.color,
+            'display' => skills_level.display
           }
         ],
         'data' => [

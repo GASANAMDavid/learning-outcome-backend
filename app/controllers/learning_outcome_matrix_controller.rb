@@ -13,8 +13,8 @@ class LearningOutcomeMatrixController < ApplicationController
   def update
     new_matrix = params[:matrix]
     matrix = UserMatrix.for(current_user)
-    new_matrix.each do |abc|
-      matrix.find(abc[:id]).update!(skills_level_id: abc[:skills_level_id])
+    new_matrix.each do |learning_outcome|
+      matrix.find(learning_outcome[:id]).update!(skills_level_id: learning_outcome[:skills_level_id])
     end
     render json: { message: 'updated successfully' }, status: 204
   end

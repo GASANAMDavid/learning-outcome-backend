@@ -6,7 +6,8 @@ class GenerateSkillLevel
       {
         id: level.id,
         description: level.description,
-        color: level.color
+        color: level.color,
+        display: level.display
       }
     end
   end
