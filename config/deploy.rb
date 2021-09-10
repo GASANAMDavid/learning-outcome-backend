@@ -23,7 +23,10 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
-      run("cd #{release_path}/current && /usr/bin/rake setup", env: { 'RAILS_ENV' => 'production' })
+      rake = fetch(:rake, 'rake')
+      rails_env = fetch(:rails_env, 'production')
+
+      run "cd '#{current_path}' && #{rake} setup RAILS_ENV=#{rails_env}"
     end
   end
 
