@@ -6,7 +6,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.2'
 
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'cape'
 gem 'dotenv-rails'
 gem 'paper_trail'
 gem 'pg', '~> 1.1'
