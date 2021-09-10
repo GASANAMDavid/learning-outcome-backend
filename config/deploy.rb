@@ -23,17 +23,11 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
+      run "cd #{deploy_to}/current"
+      run 'bundle exec rake setup RAILS_ENV=production'
     end
   end
 
   after :publishing, 'deploy:restart'
   after :finished, 'deploy:cleanup'
-end
-
-namespace :rake do
-  desc 'Invoke rake task'
-  task :invoke do
-    run "cd #{deploy_to}/current"
-    run 'bundle exec rake setup RAILS_ENV=production'
-  end
 end
