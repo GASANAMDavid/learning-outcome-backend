@@ -55,7 +55,6 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
           params: { matrix: [{ id: learning_outcome_matrix.id, skills_level_id: skills_level2.id }] }
     end
     it 'allows the user to update their skill level in the learning matrix' do
-      puts learning_outcome_matrix.skills_level_id
       expect(response.status).to eq(204)
     end
   end
