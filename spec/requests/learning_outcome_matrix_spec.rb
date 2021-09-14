@@ -6,13 +6,18 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
   let(:theme) { create(:theme) }
   let(:apprenticeship_level) { create(:apprenticeship_level) }
   let(:skill) { create(:skill, theme: theme, apprenticeship_level: apprenticeship_level) }
+  let(:skill2) { create(:skill, theme: theme, apprenticeship_level: apprenticeship_level) }
   let(:role) { create(:role) }
   let(:user) { create(:user, role: role) }
   let(:skills_level) { create(:skills_level) }
   let(:skills_level2) { create(:skills_level) }
 
-  let!(:learning_outcome_matrix) do
+  let(:learning_outcome) do
     create(:learning_outcome_matrix, skill: skill, user: user, skills_level: skills_level)
+  end
+
+  let(:another_outcome) do
+    create(:learning_outcome_matrix, skill: skill2, user: user, skills_level: skills_level)
   end
 
   describe 'GET /index' do
@@ -28,7 +33,7 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
         ],
         'data' => [
           {
-            'id' => learning_outcome_matrix.id,
+            'id' => learning_outcome.id,
             'theme' => { 'title' => theme.title, 'link' => theme.link },
             'learning_outcome' => skill.title,
             'skills_level' => skills_level.id,
@@ -52,10 +57,18 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
   describe 'PUTS /index' do
     before do
       put '/learning_outcome_matrix',
-          params: { matrix: [{ id: learning_outcome_matrix.id, skills_level_id: skills_level2.id }] }
+          params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id },
+                             { id: another_outcome.id, skills_level_id: skills_level2.id }] }
     end
     it 'allows the user to update their skill level in the learning matrix' do
       expect(response.status).to eq(204)
+    end
+
+    it 'updates the learning outcome skills_level_id' do
+      learning_outcome.reload
+      another_outcome.reload
+      expect(learning_outcome.skills_level_id).to eq(skills_level2.id)
+      expect(another_outcome.skills_level_id).to eq(skills_level2.id)
     end
   end
 end
