@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe LearningOutcomeMatrix, type: :model do
+RSpec.describe LearningOutcome, type: :model do
   it { should belong_to(:user) }
   it { should belong_to(:skills_level) }
   it { should belong_to(:skill) }
