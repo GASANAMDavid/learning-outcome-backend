@@ -7,7 +7,7 @@ class LearningOutcomeMatrixController < ApplicationController
     matrix = UserMatrix.for(current_user)
     records = GenerateMatrix.data(matrix)
     skill_level_options = GenerateSkillLevel.options
-    render json: { matrix: { data: records, skill_level_options: skill_level_options } }, status: :ok
+    json_response({ matrix: { data: records, skill_level_options: skill_level_options } }, :ok)
   end
 
   def update
@@ -18,6 +18,8 @@ class LearningOutcomeMatrixController < ApplicationController
       user_matrix.find(learning_outcome[:id]).update!(skills_level_id: learning_outcome[:skills_level_id],
                                                       updated_at: timestamps)
     end
+
+    json_response({ success: 'updated successfully' }, '204')
   end
 
   def updates_params
