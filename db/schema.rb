@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveRecord::Schema.define(version: 20_210_910_113_432) do
+ActiveRecord::Schema.define(version: 20_210_915_045_832) do
   enable_extension 'plpgsql'
   create_table 'apprenticeship_levels', force: :cascade do |t|
     t.string 'title'
@@ -8,15 +8,15 @@ ActiveRecord::Schema.define(version: 20_210_910_113_432) do
     t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table 'learning_outcome_matrices', force: :cascade do |t|
+  create_table 'learning_outcomes', force: :cascade do |t|
     t.bigint 'user_id', null: false
     t.bigint 'skill_id', null: false
     t.bigint 'skills_level_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.index ['skill_id'], name: 'index_learning_outcome_matrices_on_skill_id', unique: true
-    t.index ['skills_level_id'], name: 'index_learning_outcome_matrices_on_skills_level_id'
-    t.index ['user_id'], name: 'index_learning_outcome_matrices_on_user_id'
+    t.index ['skill_id'], name: 'index_learning_outcomes_on_skill_id', unique: true
+    t.index ['skills_level_id'], name: 'index_learning_outcomes_on_skills_level_id'
+    t.index ['user_id'], name: 'index_learning_outcomes_on_user_id'
   end
 
   create_table 'roles', force: :cascade do |t|
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 20_210_910_113_432) do
     t.index %w[item_type item_id], name: 'index_versions_on_item_type_and_item_id'
   end
 
-  add_foreign_key 'learning_outcome_matrices', 'skills'
-  add_foreign_key 'learning_outcome_matrices', 'skills_levels'
-  add_foreign_key 'learning_outcome_matrices', 'users'
+  add_foreign_key 'learning_outcomes', 'skills'
+  add_foreign_key 'learning_outcomes', 'skills_levels'
+  add_foreign_key 'learning_outcomes', 'users'
   add_foreign_key 'skills', 'apprenticeship_levels'
   add_foreign_key 'skills', 'themes'
   add_foreign_key 'users', 'roles'
