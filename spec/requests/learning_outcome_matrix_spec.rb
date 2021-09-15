@@ -50,7 +50,6 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
     end
 
     it 'returns the current learning outcome matrix for a user' do
-      p response
       expect(response.parsed_body['matrix']).to eq(current_user_matrix)
     end
   end
@@ -69,7 +68,6 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
       it 'updates the learning outcome skills_level_id' do
         learning_outcome.reload
         another_outcome.reload
-        p response
         expect(learning_outcome.skills_level_id).to eq(skills_level2.id)
         expect(another_outcome.skills_level_id).to eq(skills_level2.id)
       end
@@ -84,7 +82,6 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
       it 'validates the new skills_level_id' do
         learning_outcome.reload
         another_outcome.reload
-        p response
         expect(learning_outcome.skills_level_id).to eq(skills_level2.id)
         expect(response.parsed_body['errors']).to eq('Validation failed: Skills level must exist')
       end

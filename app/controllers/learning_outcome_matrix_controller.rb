@@ -19,7 +19,7 @@ class LearningOutcomeMatrixController < ApplicationController
                                                       updated_at: timestamps)
     end
 
-    json_response({ success: 'updated successfully' }, '204')
+    json_response({}, :no_content)
   end
 
   def updates_params
