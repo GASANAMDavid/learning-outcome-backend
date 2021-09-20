@@ -13,13 +13,15 @@ RSpec.describe GenerateSkillLevel do
         {
           id: skills_level1.id,
           description: skills_level1.description,
-          color: skills_level1.color
+          color: skills_level1.color,
+          display: skills_level1.display
         },
 
         {
           id: skills_level2.id,
           description: skills_level2.description,
-          color: skills_level2.color
+          color: skills_level2.color,
+          display: skills_level2.display
         }
       ]
     )
