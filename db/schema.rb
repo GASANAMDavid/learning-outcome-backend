@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_103052) do
+ActiveRecord::Schema.define(version: 2021_09_20_061743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,19 +22,18 @@ ActiveRecord::Schema.define(version: 2021_09_17_103052) do
   end
 
   create_table "learning_outcomes", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
     t.bigint "skills_level_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "learning_outcomes_matrix_id", null: false
+    t.index ["learning_outcomes_matrix_id"], name: "index_learning_outcomes_on_learning_outcomes_matrix_id"
     t.index ["skill_id"], name: "index_learning_outcomes_on_skill_id", unique: true
     t.index ["skills_level_id"], name: "index_learning_outcomes_on_skills_level_id"
-    t.index ["user_id"], name: "index_learning_outcomes_on_user_id"
   end
 
   create_table "learning_outcomes_matrices", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "matrix"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_learning_outcomes_matrices_on_user_id"
@@ -95,9 +94,9 @@ ActiveRecord::Schema.define(version: 2021_09_17_103052) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "learning_outcomes", "learning_outcomes_matrices"
   add_foreign_key "learning_outcomes", "skills"
   add_foreign_key "learning_outcomes", "skills_levels"
-  add_foreign_key "learning_outcomes", "users"
   add_foreign_key "learning_outcomes_matrices", "users"
   add_foreign_key "skills", "apprenticeship_levels"
   add_foreign_key "skills", "themes"

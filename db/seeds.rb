@@ -1116,3 +1116,5 @@ end
 users.each do |user|
   User.create(user)
 end
+
+LearningOutcomesMatrix.create(user_id: User.first.id)

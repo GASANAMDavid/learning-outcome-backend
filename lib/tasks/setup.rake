@@ -6,9 +6,9 @@ task setup: [:environment, 'db:drop', 'db:create', 'db:migrate', 'db:seed'] do
 end
 
 task initialize_users_matrix: :environment do
-  puts 'Initializing the learning outcome matrix for a new user.............'
+  puts 'Initializing the learning outcomes for a new user.............'
   Skill.order(:id).all.each do |skill|
-    LearningOutcomeMatrix.create!(skill_id: skill.id, skills_level_id: 1, user_id: 1)
+    LearningOutcome.create!(skill_id: skill.id, skills_level_id: 1, learning_outcomes_matrix_id: 1)
   end
   puts 'Finished setting initial users skills'
 end
