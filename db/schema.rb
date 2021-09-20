@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_20_061743) do
+ActiveRecord::Schema.define(version: 2021_09_20_083555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_061743) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "learning_outcomes_matrix_id", null: false
     t.index ["learning_outcomes_matrix_id"], name: "index_learning_outcomes_on_learning_outcomes_matrix_id"
-    t.index ["skill_id"], name: "index_learning_outcomes_on_skill_id", unique: true
+    t.index ["skill_id"], name: "index_learning_outcomes_on_skill_id"
     t.index ["skills_level_id"], name: "index_learning_outcomes_on_skills_level_id"
   end
 

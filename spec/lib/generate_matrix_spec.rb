@@ -9,9 +9,11 @@ RSpec.describe GenerateMatrix do
   let(:role) { create(:role) }
   let(:user) { create(:user, role: role) }
   let(:skills_level) { create(:skills_level) }
+  let(:learning_outcomes_matrix) { create(:learning_outcomes_matrix, user: user) }
 
   let!(:learning_outcome) do
-    create(:learning_outcome, skill: skill, user: user, skills_level: skills_level)
+    create(:learning_outcome, skill: skill, learning_outcomes_matrix: learning_outcomes_matrix,
+                              skills_level: skills_level)
   end
 
   it 'generates a list of learning outcomes with user skills_levels' do

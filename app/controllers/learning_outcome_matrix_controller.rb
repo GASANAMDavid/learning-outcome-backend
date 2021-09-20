@@ -4,21 +4,35 @@ class LearningOutcomeMatrixController < ApplicationController
   before_action :set_paper_trail_whodunnit
 
   def index
-    matrix = UserMatrix.for(current_user)
-    records = GenerateMatrix.data(matrix)
+    current_matrix_outcomes = MatrixOutcomes.for(current_user)
+    records = GenerateMatrix.data(current_matrix_outcomes)
     skill_level_options = GenerateSkillLevel.options
     json_response({ matrix: { data: records, skill_level_options: skill_level_options } }, :ok)
   end
 
   def update
     new_updates = updates_params
-    user_matrix = UserMatrix.for(current_user)
-    timestamps = Time.now.getutc
-    new_updates.each do |learning_outcome|
-      user_matrix.find(learning_outcome[:id]).update!(skills_level_id: learning_outcome[:skills_level_id],
-                                                      updated_at: timestamps)
-    end
 
+    previous_matrix = LearningOutcomesMatrix.where(user: current_user).last
+    updated_matrix = LearningOutcomesMatrix.create(user: current_user)
+    previous_outcomes = previous_matrix.learning_outcomes
+
+    previous_outcomes.each do |outcome|
+      has_new_updates = new_updates.find { |new_update| new_update[:id].to_i == outcome.id }
+      if has_new_updates
+        LearningOutcome.create(
+          skill_id: outcome.skill_id,
+          skills_level_id: has_new_updates[:skills_level_id],
+          learning_outcomes_matrix: updated_matrix
+        )
+      else
+        LearningOutcome.create!(
+          skill_id: outcome.skill_id,
+          skills_level_id: outcome.skills_level_id,
+          learning_outcomes_matrix: updated_matrix
+        )
+      end
+    end
     json_response({}, :no_content)
   end
 
