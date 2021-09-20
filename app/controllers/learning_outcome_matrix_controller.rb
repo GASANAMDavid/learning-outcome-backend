@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class LearningOutcomeMatrixController < ApplicationController
-  before_action :set_paper_trail_whodunnit
-
   def index
     current_matrix_outcomes = MatrixOutcomes.for(current_user)
     records = GenerateMatrix.data(current_matrix_outcomes)
