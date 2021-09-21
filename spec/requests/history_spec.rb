@@ -34,7 +34,7 @@ RSpec.describe 'Histories', type: :request do
       expected_response = {
         'matrices' => [
           {
-            'matrix' => [
+            'data' => [
               {
                 'id' => learning_outcome.id, 'learning_outcome' => skill.title, 'skills_level' => skills_level.id,
                 'theme' => { 'title' => theme.title, 'link' => theme.link }, 'apprenticeship_level' => apprenticeship_level.id
@@ -43,7 +43,7 @@ RSpec.describe 'Histories', type: :request do
             'updated_at' => learning_outcomes_matrix.updated_at.to_s
           },
           {
-            'matrix' => [
+            'data' => [
               {
                 'id' => another_outcome.id, 'learning_outcome' => skill.title, 'skills_level' => skills_level2.id,
                 'theme' => { 'title' => theme.title, 'link' => theme.link }, 'apprenticeship_level' => apprenticeship_level.id
