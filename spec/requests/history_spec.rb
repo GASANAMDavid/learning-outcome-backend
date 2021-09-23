@@ -40,7 +40,7 @@ RSpec.describe 'Histories', type: :request do
                 'theme' => { 'title' => theme.title, 'link' => theme.link }, 'apprenticeship_level' => apprenticeship_level.id
               }
             ],
-            'updated_at' => learning_outcomes_matrix.updated_at.to_s
+            'updated_at' => learning_outcomes_matrix.updated_at.to_time.to_i
           },
           {
             'data' => [
@@ -49,7 +49,7 @@ RSpec.describe 'Histories', type: :request do
                 'theme' => { 'title' => theme.title, 'link' => theme.link }, 'apprenticeship_level' => apprenticeship_level.id
               }
             ],
-            'updated_at' => another_outcomes_matrix.updated_at.to_s
+            'updated_at' => another_outcomes_matrix.updated_at.to_time.to_i
           }
         ]
       }
