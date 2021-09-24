@@ -32,8 +32,15 @@ RSpec.describe 'Histories', type: :request do
 
     it 'responds with learning outcome history updates' do
       expected_response = {
+        'skill_level_options' => [
+          { 'id' => skills_level.id, 'description' => skills_level.description, 'color' => skills_level.color,
+            'display' => skills_level.display },
+          { 'id' => skills_level2.id, 'description' => skills_level2.description, 'color' => skills_level2.color,
+            'display' => skills_level2.display }
+        ],
         'matrices' => [
           {
+            'id' => learning_outcomes_matrix.id,
             'data' => [
               {
                 'id' => learning_outcome.id, 'learning_outcome' => skill.title, 'skills_level' => skills_level.id,
@@ -43,6 +50,7 @@ RSpec.describe 'Histories', type: :request do
             'updated_at' => learning_outcomes_matrix.updated_at.to_time.to_i
           },
           {
+            'id' => another_outcomes_matrix.id,
             'data' => [
               {
                 'id' => another_outcome.id, 'learning_outcome' => skill.title, 'skills_level' => skills_level2.id,

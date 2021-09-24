@@ -11,7 +11,7 @@ class MatrixOutcomes
     matrices = LearningOutcomesMatrix.where(user: user)
 
     matrices.each do |matrix|
-      history << { outcomes: get_outcomes(matrix), updated_at: matrix.updated_at.to_time.to_i }
+      history << { id: matrix.id, outcomes: get_outcomes(matrix), updated_at: matrix.updated_at.to_time.to_i }
     end
     history
   end
