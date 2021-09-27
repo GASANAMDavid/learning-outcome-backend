@@ -11,13 +11,16 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
   let(:user) { create(:user, role: role) }
   let(:skills_level) { create(:skills_level) }
   let(:skills_level2) { create(:skills_level) }
+  let(:learning_outcomes_matrix) { create(:learning_outcomes_matrix, user: user) }
 
   let!(:learning_outcome) do
-    create(:learning_outcome, skill: skill, user: user, skills_level: skills_level)
+    create(:learning_outcome, skill: skill, learning_outcomes_matrix: learning_outcomes_matrix,
+                              skills_level: skills_level)
   end
 
-  let(:another_outcome) do
-    create(:learning_outcome, skill: skill2, user: user, skills_level: skills_level)
+  let!(:another_outcome) do
+    create(:learning_outcome, skill: skill2, learning_outcomes_matrix: learning_outcomes_matrix,
+                              skills_level: skills_level)
   end
 
   describe 'GET /index' do
@@ -38,6 +41,13 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
             'learning_outcome' => skill.title,
             'skills_level' => skills_level.id,
             'apprenticeship_level' => apprenticeship_level.id
+          },
+          {
+            'id' => another_outcome.id,
+            'theme' => { 'title' => theme.title, 'link' => theme.link },
+            'learning_outcome' => skill2.title,
+            'skills_level' => skills_level.id,
+            'apprenticeship_level' => apprenticeship_level.id
           }
         ]
       }
@@ -56,34 +66,31 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
 
   describe 'PUTS /update' do
     describe 'when all new updates are valid' do
-      before do
-        put '/learning_outcome_matrix',
-            params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id },
-                               { id: another_outcome.id, skills_level_id: skills_level2.id }] }
-      end
       it 'allows the user to update their skill level in the learning matrix' do
+        put '/learning_outcome_matrix',
+            params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id }] }
         expect(response.status).to eq(204)
       end
 
-      it 'updates the learning outcome skills_level_id' do
-        learning_outcome.reload
-        another_outcome.reload
-        expect(learning_outcome.skills_level_id).to eq(skills_level2.id)
-        expect(another_outcome.skills_level_id).to eq(skills_level2.id)
+      it 'creates new updated learning outcomes' do
+        expect do
+          put '/learning_outcome_matrix',
+              params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id }] }
+        end.to change {
+                 LearningOutcome.count
+               }.by(2)
       end
     end
 
     describe 'when there is an invalid outcome update' do
-      before do
-        put '/learning_outcome_matrix',
-            params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id },
-                               { id: another_outcome.id, skills_level_id: 1000 }] }
-      end
       it 'validates the new skills_level_id' do
-        learning_outcome.reload
-        another_outcome.reload
-        expect(learning_outcome.skills_level_id).to eq(skills_level2.id)
-        expect(response.parsed_body['errors']).to eq('Validation failed: Skills level must exist')
+        expect do
+          put '/learning_outcome_matrix',
+              params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id },
+                                 { id: another_outcome.id, skills_level_id: 1000 }] }
+        end.to change {
+                 LearningOutcome.count
+               }.by(1)
       end
     end
   end

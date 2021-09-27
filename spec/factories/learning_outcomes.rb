@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :learning_outcome do
-    user
+    learning_outcomes_matrix
     skill
     skills_level
   end
