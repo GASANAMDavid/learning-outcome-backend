@@ -9,28 +9,10 @@ class LearningOutcomeMatrixController < ApplicationController
   end
 
   def update
-    new_updates = updates_params
-
     previous_matrix = LearningOutcomesMatrix.where(user: current_user).last
-    updated_matrix = LearningOutcomesMatrix.create(user: current_user)
-    previous_outcomes = previous_matrix.learning_outcomes
+    new_matrix = LearningOutcomesMatrix.create(user: current_user)
 
-    previous_outcomes.each do |outcome|
-      has_new_updates = new_updates.find { |new_update| new_update[:id].to_i == outcome.id }
-      if has_new_updates
-        LearningOutcome.create(
-          skill_id: outcome.skill_id,
-          skills_level_id: has_new_updates[:skills_level_id],
-          learning_outcomes_matrix: updated_matrix
-        )
-      else
-        LearningOutcome.create!(
-          skill_id: outcome.skill_id,
-          skills_level_id: outcome.skills_level_id,
-          learning_outcomes_matrix: updated_matrix
-        )
-      end
-    end
+    UpdateMatrix.run(new_matrix, updates_params, previous_matrix)
     json_response({}, :no_content)
   end
 
