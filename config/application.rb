@@ -23,5 +23,13 @@ module LearningOutcomeApi
   class Application < Rails::Application
     config.load_defaults 6.1
     config.api_only = true
+    config.generators do |g|
+      g.test_framework :rspec,
+                       request_specs: false,
+                       view_specs: false,
+                       routing_specs: false,
+                       helper_specs: false,
+                       controller_specs: true
+    end
   end
 end
