@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LearningOutcomeMatrixController < ApplicationController
+class LearningOutcomeMatrixController < SecuredController
   def index
     current_matrix_outcomes = MatrixOutcomes.for(current_user)
     records = GenerateMatrix.data(current_matrix_outcomes)
