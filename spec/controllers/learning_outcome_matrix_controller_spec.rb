@@ -24,7 +24,8 @@ RSpec.describe LearningOutcomeMatrixController, type: :controller do
   end
 
   before do
-    allow(controller).to receive(:authorize_request).and_return(true)
+    allow(controller).to receive(:authorize_user).and_return(true)
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   describe 'GET /index' do
