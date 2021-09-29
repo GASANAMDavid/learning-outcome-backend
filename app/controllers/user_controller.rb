@@ -1,6 +1,7 @@
 class UserController < ApplicationController
   def create
-    User.create!(user_params)
+    user = User.create!(user_params)
+    MatrixInitialization.call(user)
     json_response({}, :ok)
   end
 
