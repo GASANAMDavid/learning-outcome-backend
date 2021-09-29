@@ -1,11 +1,11 @@
 class SecuredController < ApplicationController
-  before_action :authorize_request
+  before_action :authorize_user
 
   private
 
-  def authorize_request
-    Authorization.new(request.headers).authenticate_request!
+  def authorize_user
+    @current_user = Authorization.new(request.headers).authenticate_user!
   rescue JWT::VerificationError, JWT::DecodeError
-    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+    render json_response({ errors: ['Not Authenticated'] }, :unauthorized)
   end
 end
