@@ -1,13 +1,14 @@
 class UserController < ApplicationController
   def create
-    user = User.create!(user_params)
+    role = Role.first
+    user = User.create!(user_params.merge(role_id: role.id))
     MatrixInitialization.call(user)
-    json_response({}, :ok)
+    json_response({ message: 'Created Successfully' }, :ok)
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :role_id)
+    params.require(:user).permit(:email, :first_name, :last_name)
   end
 end
