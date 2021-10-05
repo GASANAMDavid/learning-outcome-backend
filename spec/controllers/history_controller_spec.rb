@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Histories', type: :request do
+RSpec.describe HistoryController, type: :controller do
   describe 'GET /index' do
     let(:theme) { create(:theme) }
     let(:apprenticeship_level) { create(:apprenticeship_level) }
@@ -23,7 +23,9 @@ RSpec.describe 'Histories', type: :request do
     end
 
     before do
-      get '/history'
+      allow(controller).to receive(:authorize_user).and_return(true)
+      allow(controller).to receive(:current_user).and_return(user)
+      get :index
     end
 
     it 'responds with status :ok' do

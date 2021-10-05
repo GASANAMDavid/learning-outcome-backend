@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe LearningOutcomeMatrixController, type: :request do
+RSpec.describe LearningOutcomeMatrixController, type: :controller do
   let(:theme) { create(:theme) }
   let(:apprenticeship_level) { create(:apprenticeship_level) }
   let(:skill) { create(:skill, theme: theme, apprenticeship_level: apprenticeship_level) }
@@ -21,6 +21,11 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
   let!(:another_outcome) do
     create(:learning_outcome, skill: skill2, learning_outcomes_matrix: learning_outcomes_matrix,
                               skills_level: skills_level)
+  end
+
+  before do
+    allow(controller).to receive(:authorize_user).and_return(true)
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   describe 'GET /index' do
@@ -53,7 +58,7 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
       }
     end
 
-    before { get '/learning_outcome_matrix' }
+    before { get :index }
 
     it 'returns success response' do
       expect(response).to have_http_status(:ok)
@@ -67,30 +72,23 @@ RSpec.describe LearningOutcomeMatrixController, type: :request do
   describe 'PUTS /update' do
     describe 'when all new updates are valid' do
       it 'allows the user to update their skill level in the learning matrix' do
-        put '/learning_outcome_matrix',
-            params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id }] }
+        put :update, params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id }] }
         expect(response.status).to eq(204)
       end
 
       it 'creates new updated learning outcomes' do
         expect do
-          put '/learning_outcome_matrix',
-              params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id }] }
-        end.to change {
-                 LearningOutcome.count
-               }.by(2)
+          put :update, params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id }] }
+        end.to change { LearningOutcome.count }.by(2)
       end
     end
 
     describe 'when there is an invalid outcome update' do
       it 'validates the new skills_level_id' do
         expect do
-          put '/learning_outcome_matrix',
-              params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id },
-                                 { id: another_outcome.id, skills_level_id: 1000 }] }
-        end.to change {
-                 LearningOutcome.count
-               }.by(1)
+          put :update, params: { matrix: [{ id: learning_outcome.id, skills_level_id: skills_level2.id },
+                                          { id: another_outcome.id, skills_level_id: 1000 }] }
+        end.to change { LearningOutcome.count }.by(1)
       end
     end
   end

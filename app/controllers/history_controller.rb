@@ -1,4 +1,4 @@
-class HistoryController < ApplicationController
+class HistoryController < SecuredController
   def index
     history_data = []
     matrix_outcomes_history = MatrixOutcomes.history_for(current_user)
