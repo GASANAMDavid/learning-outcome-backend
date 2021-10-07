@@ -6,6 +6,7 @@ lock '~> 3.16.0'
 require 'capistrano-db-tasks'
 
 set :application, 'learning-outcome-app'
+set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w[~/.ssh/id_rsa] }
 set :repo_url, 'git@github.com:GASANAMDavid/learning-outcome-backend.git'
 set :deploy_to, '/home/deploy/learning-outcome-app'
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
