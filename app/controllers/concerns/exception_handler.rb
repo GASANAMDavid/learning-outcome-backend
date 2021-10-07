@@ -11,5 +11,9 @@ module ExceptionHandler
     rescue_from ActiveRecord::RecordNotUnique do |_e|
       json_response({ errors: "User with email: #{params[:user][:email]} already exists" }, :conflict)
     end
+
+    rescue_from Net::OpenTimeout do |e|
+      json_response({ errors: e.message }, :request_timeout)
+    end
   end
 end
