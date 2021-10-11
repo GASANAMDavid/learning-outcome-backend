@@ -26,6 +26,8 @@ gem 'rspec-core'
 gem 'rack-cors'
 gem 'rake', '~> 13.0', '>= 13.0.6'
 
+gem 'capistrano-rails-collection'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'

@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'database_cleaner'
-
-DatabaseCleaner.clean_with(:truncation)
-
 skills_levels = [
   {
     description: 'Default',
