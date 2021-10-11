@@ -19,5 +19,5 @@ test:
 production:
   <<: *default
   database: learning_outcome_app_production
-  username: deploy
+  user: deploy
   password: Rails.application.credentials.dig(:production, db_password)
