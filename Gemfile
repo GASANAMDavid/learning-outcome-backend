@@ -21,8 +21,11 @@ gem 'rswag'
 gem 'rswag-api'
 gem 'rswag-ui'
 
-gem 'database_cleaner'
 gem 'rspec-core'
+
+gem 'capistrano-rails-collection'
+
+gem 'database_cleaner'
 
 gem 'rack-cors'
 gem 'rake', '~> 13.0', '>= 13.0.6'
