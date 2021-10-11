@@ -27,6 +27,19 @@ namespace :deploy do
     end
   end
 
+  desc 'Seed production database'
+  task :seed_database do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, :exec, :rake, 'db:seed'
+        end
+      end
+    end
+  end
+
+  after 'deploy:migrate', 'deploy:seed_database'
+
   after :publishing, 'deploy:restart'
   after :finished, 'deploy:cleanup'
 end

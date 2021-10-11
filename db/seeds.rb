@@ -2,7 +2,12 @@
 
 require 'database_cleaner'
 
+DatabaseCleaner.allow_production = true
+DatabaseCleaner.allow_remote_database_url = true
 DatabaseCleaner.clean_with(:truncation)
+DatabaseCleaner.url_allowlist = [
+  %r{^postgres://postgres@localhost}
+]
 
 skills_levels = [
   {
