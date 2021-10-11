@@ -32,6 +32,7 @@ namespace :deploy do
     run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
   end
 
-  after :publishing, 'deploy:restart'
+  after :publishing, 'db:seed'
+  after :seeding, 'deploy:restart'
   after :finished, 'deploy:cleanup'
 end
