@@ -4,7 +4,7 @@
 lock '~> 3.16.0'
 
 require 'capistrano-db-tasks'
-load 'lib/deploy/seed'
+# load 'lib/deploy/seed'
 
 set :application, 'learning-outcome-app'
 set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w[~/.ssh/id_rsa] }
