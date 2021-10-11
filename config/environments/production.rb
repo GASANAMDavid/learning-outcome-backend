@@ -115,6 +115,6 @@ Rails.application.configure do
 
   config.eager_load_paths += Dir["#{config.root}/lib/**/*.rb"]
 
-  DatabaseCleaner.allow_production = true
-  DatabaseCleaner.allow_remote_database_url = true
+  # DatabaseCleaner.allow_production = true
+  # DatabaseCleaner.allow_remote_database_url = true
 end
