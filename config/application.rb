@@ -14,6 +14,7 @@ require 'action_mailbox/engine'
 require 'action_text/engine'
 require 'action_view/railtie'
 require 'action_cable/engine'
+require 'database_cleaner/active_record'
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -31,5 +32,8 @@ module LearningOutcomeApi
                        helper_specs: false,
                        controller_specs: true
     end
+
+    DatabaseCleaner.allow_production = true
+    DatabaseCleaner.allow_remote_database_url = true
   end
 end

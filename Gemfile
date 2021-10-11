@@ -23,7 +23,10 @@ gem 'rswag-ui'
 
 gem 'rspec-core'
 
-gem 'database_cleaner'
+gem 'capistrano-rails-collection'
+
+gem 'database_cleaner-active_record'
+
 gem 'rack-cors'
 gem 'rake', '~> 13.0', '>= 13.0.6'
 
