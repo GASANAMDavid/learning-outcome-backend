@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'database_cleaner/active_record'
-
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
