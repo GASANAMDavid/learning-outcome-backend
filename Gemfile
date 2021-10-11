@@ -25,7 +25,7 @@ gem 'rspec-core'
 
 gem 'capistrano-rails-collection'
 
-gem 'database_cleaner-active_record'
+gem 'database_cleaner'
 
 gem 'rack-cors'
 gem 'rake', '~> 13.0', '>= 13.0.6'
