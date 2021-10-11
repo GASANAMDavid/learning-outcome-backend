@@ -23,6 +23,7 @@ gem 'rswag-ui'
 
 gem 'rspec-core'
 
+gem 'database_cleaner'
 gem 'rack-cors'
 gem 'rake', '~> 13.0', '>= 13.0.6'
 
@@ -33,10 +34,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rswag-specs'
   gem 'shoulda-matchers'
-end
-
-group :test do
-  gem 'database_cleaner'
 end
 
 group :development do
