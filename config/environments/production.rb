@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'database_cleaner/active_record'
+
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
@@ -113,5 +115,6 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.eager_load_paths += Dir["#{config.root}/lib/**/*.rb"]
+  DatabaseCleaner.allow_production = true
+  DatabaseCleaner.allow_remote_database_url = true
 end
