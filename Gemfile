@@ -21,7 +21,6 @@ gem 'rswag'
 gem 'rswag-api'
 gem 'rswag-ui'
 
-gem 'database_cleaner'
 gem 'rspec-core'
 
 gem 'rack-cors'
@@ -36,6 +35,10 @@ group :development, :test do
   gem 'shoulda-matchers'
 end
 
+group :test do
+  gem 'database_cleaner'
+end
+
 group :development do
   gem 'capistrano', require: false
   gem 'capistrano-db-tasks', require: false
@@ -46,4 +49,5 @@ group :development do
   gem 'spring-watcher-listen'
   gem 'web-console'
 end
+
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
