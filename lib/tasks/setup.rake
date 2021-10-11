@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+load 'lib/deploy/seed'
+
 desc 'seed the tables and sets initial users learning outcome matrix'
 task setup: [:environment, 'db:seed'] do
   Rake::Task['initialize_users_matrix'].invoke if Rails.env.development?
