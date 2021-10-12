@@ -1090,27 +1090,27 @@ users = [
 ]
 
 skills_levels.each do |skill_level|
-  SkillsLevel.create(skill_level)
+  SkillsLevel.find_or_create_by(skill_level)
 end
 
 themes.each do |theme|
-  Theme.create(theme)
+  Theme.find_or_create_by(theme)
 end
 
 apprenticeship_levels.each do |apprenticeship_level|
-  ApprenticeshipLevel.create(apprenticeship_level)
+  ApprenticeshipLevel.find_or_create_by(apprenticeship_level)
 end
 
 skills.each do |skill|
-  Skill.create(skill)
+  Skill.find_or_create_by(skill)
 end
 
 roles.each do |role|
-  Role.create(role)
+  Role.find_or_create_by(role)
 end
 
 users.each do |user|
-  User.create(user)
+  User.find_or_create_by(user)
 end
 
-LearningOutcomesMatrix.create(user_id: User.first.id)
+LearningOutcomesMatrix.find_or_create_by(user_id: User.first.id)
