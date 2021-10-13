@@ -16,7 +16,6 @@ class JsonWebToken
 
   def self.jwks_hash
     jwks_keys = Rails.application.credentials.jwks
-    p jwks_keys
     jwks_keys
       .map do |k|
       [

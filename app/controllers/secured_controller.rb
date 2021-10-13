@@ -7,7 +7,7 @@ class SecuredController < ApplicationController
 
   def authorize_user
     @current_user = Authorization.authenticate_user!(request.headers)
-  rescue JWT::VerificationError, JWT::DecodeError => e
+  rescue JWT::VerificationError, JWT::DecodeError
     json_response({ errors: ['Not Authenticated'] }, :unauthorized)
   end
 end
