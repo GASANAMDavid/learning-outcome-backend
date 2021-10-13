@@ -7,7 +7,7 @@ RSpec.describe UserController, type: :controller do
     let!(:skill) { create(:skill, theme: theme, apprenticeship_level: apprenticeship_level) }
     let!(:skill2) { create(:skill, theme: theme, apprenticeship_level: apprenticeship_level) }
     let!(:skills_level) { create(:skills_level) }
-    let(:role) { create(:role) }
+    let!(:role) { create(:role) }
 
     let(:user_params) do
       { user: { first_name: 'John', last_name: 'Doe', email: 'janedoe2021@gmail.com', role_id: role.id } }
@@ -38,6 +38,26 @@ RSpec.describe UserController, type: :controller do
       it 'responds with' do
         expect(response.parsed_body['errors']).to eq("User with email: #{user.email} already exists")
       end
+    end
+  end
+
+  describe 'GET /index' do
+    let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
+    let(:token) { '12345 ' }
+    before do
+      allow(Authorization).to receive(:extract_user_email).and_return(user.email)
+    end
+    it 'responds with the current user' do
+      get :index
+      expect(response.parsed_body).to eq({
+                                           'user' => {
+                                             'id' => user.id,
+                                             'first_name' => user.first_name,
+                                             'last_name' => user.last_name,
+                                             'email' => user.email,
+                                             'role_id' => user.role_id
+                                           }
+                                         })
     end
   end
 end
