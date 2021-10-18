@@ -6,4 +6,9 @@ class User < ApplicationRecord
   has_many :learning_outcomes_matrices, dependent: :destroy
 
   validates :first_name, :last_name, :email, presence: true
+
+  def admin?
+    role = Role.find(role_id)
+    role.name == 'admin'
+  end
 end
