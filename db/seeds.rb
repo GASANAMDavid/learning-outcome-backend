@@ -1077,6 +1077,10 @@ roles = [
   {
     name: 'apprentice',
     description: 'An apprentice is trained to write and test code, working in a professional development environment, and using software development frameworks and methodologies'
+  },
+  {
+    name: 'admin',
+    description: 'An admin is responsible to create accounts for apprentices and manage all the app activities'
   }
 ]
 

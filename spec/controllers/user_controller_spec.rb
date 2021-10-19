@@ -43,10 +43,10 @@ RSpec.describe UserController, type: :controller do
 
   describe 'GET /index' do
     let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
-    let(:token) { '12345 ' }
     before do
       allow(Authorization).to receive(:extract_user_email).and_return(user.email)
     end
+
     it 'responds with the current user' do
       get :index
       expect(response.parsed_body).to eq({
@@ -55,9 +55,56 @@ RSpec.describe UserController, type: :controller do
                                              'first_name' => user.first_name,
                                              'last_name' => user.last_name,
                                              'email' => user.email,
-                                             'role_id' => user.role_id
+                                             'role' => { 'id' => user.role_id, 'admin' => user.admin? }
                                            }
                                          })
+    end
+  end
+
+  describe 'PATCH /update' do
+    let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
+
+    before do
+      allow(Authorization).to receive(:extract_user_email).and_return(user.email)
+    end
+
+    it 'updates user attributes' do
+      patch :update, params: { user: { first_name: 'Innocent' } }
+      user.reload
+      expect(user.first_name).to eq('Innocent')
+    end
+  end
+
+  describe 'GET /user/list_users' do
+    let!(:apprentice) { create(:user) }
+    let(:admin_role) { create(:role, name: 'admin') }
+    let!(:admin_user) { create(:user, role: admin_role) }
+
+    before do
+      allow(Authorization).to receive(:extract_user_email).and_return(admin_user.email)
+    end
+
+    it 'responds with a list of all users' do
+      get :list_users
+      expect(response.parsed_body).to eq(
+        {
+          'users' => [{
+            'id' => apprentice.id,
+            'first_name' => apprentice.first_name,
+            'last_name' => apprentice.last_name,
+            'email' => apprentice.email,
+            'role' => { 'id' => apprentice.role_id,
+                        'admin' => apprentice.admin? }
+          }, {
+            'id' => admin_user.id,
+            'first_name' => admin_user.first_name,
+            'last_name' => admin_user.last_name,
+            'email' => admin_user.email,
+            'role' => { 'id' => admin_user.role_id,
+                        'admin' => admin_user.admin? }
+          }]
+        }
+      )
     end
   end
 end
