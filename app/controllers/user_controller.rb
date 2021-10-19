@@ -1,6 +1,6 @@
 class UserController < SecuredController
   skip_before_action :authorize_user, only: %i[create]
-  before_action :check_is_admin?, only: %i[list_users]
+  before_action :check_is_admin?, only: %i[list_users destroy]
 
   def index
     json_response({ user: UserDetails.for(current_user) })
@@ -24,10 +24,15 @@ class UserController < SecuredController
     current_user.update!(user_params)
   end
 
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+  end
+
   private
 
   def check_is_admin?
-    current_user.admin?
+    json_response({ error: 'Not authorized to perform this action' }, :ok) unless current_user.admin?
   end
 
   def user_params

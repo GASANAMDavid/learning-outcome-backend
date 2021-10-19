@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :history, only: %i[index]
   patch '/user', to: 'user#update'
   get 'user/list_users', to: 'user#list_users'
-  resources :user, only: %i[index create]
+  resources :user, only: %i[index create destroy]
 end
