@@ -107,4 +107,19 @@ RSpec.describe UserController, type: :controller do
       )
     end
   end
+  describe 'DELETE /user' do
+    let!(:apprentice1) { create(:user) }
+    let!(:apprentice2) { create(:user) }
+    let!(:apprentice3) { create(:user) }
+    let(:admin_role) { create(:role, name: 'admin') }
+    let!(:admin_user) { create(:user, role: admin_role) }
+
+    before do
+      allow(Authorization).to receive(:extract_user_email).and_return(admin_user.email)
+    end
+
+    it 'deletes a user' do
+      expect { delete :destroy, params: { id: apprentice1.id } }.to change { User.count }.by(-1)
+    end
+  end
 end
