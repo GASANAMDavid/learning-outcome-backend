@@ -15,5 +15,9 @@ module ExceptionHandler
     rescue_from Net::OpenTimeout do |e|
       json_response({ errors: e.message }, :request_timeout)
     end
+
+    rescue_from ApplicationController::NotAuthorized do |e|
+      json_response({ errors: e.message }, :forbidden)
+    end
   end
 end
