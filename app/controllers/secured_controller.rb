@@ -1,6 +1,5 @@
 class SecuredController < ApplicationController
   before_action :authorize_user
-  before_action :check_is_admin?
 
   attr_reader :current_user
 

@@ -1,5 +1,4 @@
 class RolesController < SecuredController
-  skip_before_action :check_is_admin?, only: [:index]
   def index
     roles = []
     Role.all.each do |role|
