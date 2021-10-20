@@ -10,4 +10,8 @@ class SecuredController < ApplicationController
   rescue JWT::VerificationError, JWT::DecodeError
     json_response({ errors: ['Not Authenticated'] }, :unauthorized)
   end
+
+  def check_is_admin?
+    raise NotAuthorizedError unless current_user.admin?
+  end
 end

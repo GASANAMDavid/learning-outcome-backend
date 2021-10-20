@@ -7,8 +7,7 @@ class UserController < SecuredController
   end
 
   def create
-    role = Role.first
-    user = User.create!(user_params.merge(role_id: role.id))
+    user = User.create!(user_params)
     MatrixInitialization.call(user)
     json_response({ message: 'Created Successfully' }, :ok)
   end
@@ -21,7 +20,9 @@ class UserController < SecuredController
   end
 
   def update
-    current_user.update!(user_params)
+    check_is_admin? if current_user.id != params[:id].to_i
+    user = User.find(params[:id])
+    user.update!(user_params)
   end
 
   def destroy
@@ -31,11 +32,11 @@ class UserController < SecuredController
 
   private
 
-  def check_is_admin?
-    json_response({ error: 'Not authorized to perform this action' }, :ok) unless current_user.admin?
+  def authorize_update
+    check_is_admin? if current_user.id != params[:id]
   end
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name)
+    params.require(:user).permit(:email, :first_name, :last_name, :role_id)
   end
 end
