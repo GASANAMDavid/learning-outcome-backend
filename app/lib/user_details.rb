@@ -7,7 +7,8 @@ module UserDetails
       email: user.email,
       role: {
         id: user.role_id,
-        admin: user.admin?
+        admin: user.admin?,
+        name: user.role.name
       }
     }
   end
