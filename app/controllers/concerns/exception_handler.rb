@@ -16,7 +16,7 @@ module ExceptionHandler
       json_response({ errors: e.message }, :request_timeout)
     end
 
-    rescue_from ApplicationController::NotAuthorized do |e|
+    rescue_from NotAuthorizedError do |e|
       json_response({ errors: e.message }, :forbidden)
     end
   end

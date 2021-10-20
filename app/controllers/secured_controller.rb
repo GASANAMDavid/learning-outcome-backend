@@ -13,6 +13,6 @@ class SecuredController < ApplicationController
   end
 
   def check_is_admin?
-    raise NotAuthorized, 'Not authorized to perform this action' unless current_user.admin?
+    raise NotAuthorizedError unless current_user.admin?
   end
 end

@@ -130,7 +130,7 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(Authorization).to receive(:extract_user_email).and_return(apprentice2.email)
+      allow(Authorization).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'updates the user information' do
