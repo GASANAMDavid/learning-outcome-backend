@@ -55,7 +55,8 @@ RSpec.describe UserController, type: :controller do
                                              'first_name' => user.first_name,
                                              'last_name' => user.last_name,
                                              'email' => user.email,
-                                             'role' => { 'id' => user.role_id, 'admin' => user.admin? }
+                                             'role' => { 'id' => user.role_id, 'admin' => user.admin?,
+                                                         'name' => user.role.name }
                                            }
                                          })
     end
@@ -69,7 +70,7 @@ RSpec.describe UserController, type: :controller do
     end
 
     it 'updates user attributes' do
-      patch :update, params: { user: { first_name: 'Innocent' } }
+      patch :update, params: { id: user.id, user: { first_name: 'Innocent' } }
       user.reload
       expect(user.first_name).to eq('Innocent')
     end
@@ -94,14 +95,16 @@ RSpec.describe UserController, type: :controller do
             'last_name' => apprentice.last_name,
             'email' => apprentice.email,
             'role' => { 'id' => apprentice.role_id,
-                        'admin' => apprentice.admin? }
+                        'admin' => apprentice.admin?,
+                        'name' => apprentice.role.name }
           }, {
             'id' => admin_user.id,
             'first_name' => admin_user.first_name,
             'last_name' => admin_user.last_name,
             'email' => admin_user.email,
             'role' => { 'id' => admin_user.role_id,
-                        'admin' => admin_user.admin? }
+                        'admin' => admin_user.admin?,
+                        'name' => admin_user.role.name }
           }]
         }
       )
