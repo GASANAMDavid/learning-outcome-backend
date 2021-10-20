@@ -122,4 +122,21 @@ RSpec.describe UserController, type: :controller do
       expect { delete :destroy, params: { id: apprentice1.id } }.to change { User.count }.by(-1)
     end
   end
+
+  describe 'PUT /user' do
+    let!(:apprentice1) { create(:user, first_name: 'David') }
+    let!(:apprentice2) { create(:user) }
+    let(:admin_role) { create(:role, name: 'admin') }
+    let!(:admin_user) { create(:user, role: admin_role) }
+
+    before do
+      allow(Authorization).to receive(:extract_user_email).and_return(apprentice2.email)
+    end
+
+    it 'updates the user information' do
+      patch :update, params: { id: apprentice1.id, user: { first_name: 'James' } }
+      apprentice1.reload
+      expect(apprentice1.first_name).to eq('James')
+    end
+  end
 end
