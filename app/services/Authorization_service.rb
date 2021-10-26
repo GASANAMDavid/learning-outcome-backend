@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Authorization
+class AuthorizationService
   AUTHORIZATION_HEADER = 'Authorization'
   CLAIM_NAMESPACE = 'http://localhost:3000/'
 
