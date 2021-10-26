@@ -19,12 +19,10 @@ RSpec.describe UserController, type: :controller do
         expect { post :create, params: user_params }.to change { User.count }.by(1)
       end
 
-      it 'initializes user with a matrix' do
-        expect { post :create, params: user_params }.to change { LearningOutcomesMatrix.count }.by(1)
-      end
-
-      it 'adds learning_outcomes to the new created matrix' do
-        expect { post :create, params: user_params }.to change { LearningOutcome.count }.by(2)
+      it 'schedules a job to initialize the user with a matrix' do
+        allow(InitialMatrixWorker).to receive(:perform_async)
+        post :create, params: user_params
+        expect(InitialMatrixWorker).to have_received(:perform_async)
       end
     end
     context 'when a user does exist' do
@@ -46,7 +44,7 @@ RSpec.describe UserController, type: :controller do
   describe 'GET /index' do
     let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
     before do
-      allow(Authorization).to receive(:extract_user_email).and_return(user.email)
+      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
     end
 
     it 'responds with the current user' do
@@ -68,7 +66,7 @@ RSpec.describe UserController, type: :controller do
     let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
 
     before do
-      allow(Authorization).to receive(:extract_user_email).and_return(user.email)
+      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
     end
 
     it 'updates user attributes' do
@@ -84,7 +82,7 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(Authorization).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'responds with a list of all users' do
@@ -120,7 +118,7 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(Authorization).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'deletes a user' do
@@ -135,7 +133,7 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(Authorization).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'updates the user information' do
