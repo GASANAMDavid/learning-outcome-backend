@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MatrixInitialization
   def self.call(user)
     initial_matrix = LearningOutcomesMatrix.create(user: user)

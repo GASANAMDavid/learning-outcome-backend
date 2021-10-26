@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SecuredController < ApplicationController
   before_action :authorize_user
 

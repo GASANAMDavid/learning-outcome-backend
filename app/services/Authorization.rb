@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Authorization
-  AUTHORIZATION_HEADER = 'Authorization'.freeze
-  CLAIM_NAMESPACE = 'http://localhost:3000/'.freeze
+  AUTHORIZATION_HEADER = 'Authorization'
+  CLAIM_NAMESPACE = 'http://localhost:3000/'
 
   def self.authenticate_user!(headers = {}, json_web_token = JsonWebToken)
     User.find_by!(email: extract_user_email(headers, json_web_token))
@@ -17,7 +19,7 @@ class Authorization
   def self.token(headers, json_web_token)
     return unless headers[AUTHORIZATION_HEADER]
 
-    token = headers[AUTHORIZATION_HEADER].split(' ').last
+    token = headers[AUTHORIZATION_HEADER].split.last
     json_web_token.verify(token)
   end
 end

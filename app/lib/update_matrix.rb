@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UpdateMatrix
   def self.run(new_matrix, new_updates, previous_matrix)
     previous_outcomes = previous_matrix.learning_outcomes

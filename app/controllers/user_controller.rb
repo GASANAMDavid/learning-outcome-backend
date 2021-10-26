@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserController < SecuredController
   skip_before_action :authorize_user, only: %i[create]
   before_action :check_is_admin?, only: %i[list_users destroy]

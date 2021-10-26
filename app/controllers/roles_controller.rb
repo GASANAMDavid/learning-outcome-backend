@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RolesController < SecuredController
   def index
     roles = []

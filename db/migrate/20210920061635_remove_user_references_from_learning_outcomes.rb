@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveUserReferencesFromLearningOutcomes < ActiveRecord::Migration[6.1]
   def change
     remove_reference :learning_outcomes, :user, foreign_key: true
