@@ -20,9 +20,8 @@ RSpec.describe UserController, type: :controller do
       end
 
       it 'schedules a job to initialize the user with a matrix' do
-        allow(InitialMatrixWorker).to receive(:perform_async)
+        expect(InitialMatrixWorker).to receive(:perform_async)
         post :create, params: user_params
-        expect(InitialMatrixWorker).to have_received(:perform_async)
       end
     end
     context 'when a user does exist' do

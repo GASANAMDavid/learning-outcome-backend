@@ -10,8 +10,7 @@ class UserController < SecuredController
 
   def create
     user = User.create!(user_params)
-    user_id = user.id
-    InitialMatrixWorker.perform_async(user_id)
+    InitialMatrixWorker.perform_async(user.id)
     json_response({ message: 'Created Successfully' }, :ok)
   end
 
