@@ -15,18 +15,16 @@ gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 gem 'sidekiq'
 gem 'sinatra'
 
-gem 'rubocop'
-gem 'rubocop-rails'
-gem 'rubocop-rspec'
-
+gem 'rack-cors'
+gem 'rake', '~> 13.0', '>= 13.0.6'
+gem 'redis-rails'
+gem 'rspec-core'
 gem 'rswag'
 gem 'rswag-api'
 gem 'rswag-ui'
-
-gem 'rspec-core'
-
-gem 'rack-cors'
-gem 'rake', '~> 13.0', '>= 13.0.6'
+gem 'rubocop'
+gem 'rubocop-rails'
+gem 'rubocop-rspec'
 
 gem 'capistrano-rails-collection'
 
@@ -35,13 +33,13 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry'
   gem 'rspec-rails'
-  gem 'rspec-sidekiq'
   gem 'rswag-specs'
   gem 'shoulda-matchers'
 end
 
 group :test do
   gem 'database_cleaner'
+  gem 'rspec-sidekiq'
 end
 
 group :development do
