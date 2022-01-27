@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HistoryController < SecuredController
   def index
     history_data = []

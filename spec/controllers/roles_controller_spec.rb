@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RolesController, type: :controller do
@@ -7,7 +9,7 @@ RSpec.describe RolesController, type: :controller do
     let(:user) { create(:user, role: apprentice) }
 
     before do
-      allow(Authorization).to receive(:extract_user_email).and_return(user.email)
+      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
     end
 
     it 'should return available roles' do

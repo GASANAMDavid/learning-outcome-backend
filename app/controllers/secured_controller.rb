@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SecuredController < ApplicationController
   before_action :authorize_user
 
@@ -6,7 +8,7 @@ class SecuredController < ApplicationController
   private
 
   def authorize_user
-    @current_user = Authorization.authenticate_user!(request.headers)
+    @current_user = AuthorizationService.authenticate_user!(request.headers)
   rescue JWT::VerificationError, JWT::DecodeError
     json_response({ errors: ['Not Authenticated'] }, :unauthorized)
   end

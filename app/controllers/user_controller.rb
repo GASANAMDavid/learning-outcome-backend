@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserController < SecuredController
   skip_before_action :authorize_user, only: %i[create]
   before_action :check_is_admin?, only: %i[list_users destroy]
@@ -8,7 +10,7 @@ class UserController < SecuredController
 
   def create
     user = User.create!(user_params)
-    MatrixInitialization.call(user)
+    InitialMatrixWorker.perform_async(user.id)
     json_response({ message: 'Created Successfully' }, :ok)
   end
 

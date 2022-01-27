@@ -3,28 +3,28 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.2'
+ruby '~>3.0.2'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'dotenv-rails'
 gem 'jwt'
-gem 'paper_trail'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 
-gem 'rubocop'
-gem 'rubocop-rails'
-gem 'rubocop-rspec'
-
-gem 'rswag'
-gem 'rswag-api'
-gem 'rswag-ui'
-
-gem 'rspec-core'
+gem 'sidekiq'
+gem 'sinatra'
 
 gem 'rack-cors'
 gem 'rake', '~> 13.0', '>= 13.0.6'
+gem 'redis-rails'
+gem 'rspec-core'
+gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
+gem 'rubocop'
+gem 'rubocop-rails'
+gem 'rubocop-rspec'
 
 gem 'capistrano-rails-collection'
 
@@ -39,6 +39,7 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'rspec-sidekiq'
 end
 
 group :development do

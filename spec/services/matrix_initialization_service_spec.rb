@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe MatrixInitialization do
+RSpec.describe MatrixInitializationService do
   let(:theme) { create(:theme) }
   let(:apprenticeship_level) { create(:apprenticeship_level) }
   let!(:skill) { create(:skill, theme: theme, apprenticeship_level: apprenticeship_level) }
@@ -10,10 +12,10 @@ RSpec.describe MatrixInitialization do
   let(:user) { create(:user, role: role) }
 
   it 'initializes user with a matrix' do
-    expect { described_class.call(user) }.to change { LearningOutcomesMatrix.count }.by(1)
+    expect { described_class.call(user.id) }.to change { LearningOutcomesMatrix.count }.by(1)
   end
 
   it 'adds learning_outcomes to the new created matrix' do
-    expect { described_class.call(user) }.to change { LearningOutcome.count }.by(2)
+    expect { described_class.call(user.id) }.to change { LearningOutcome.count }.by(2)
   end
 end
