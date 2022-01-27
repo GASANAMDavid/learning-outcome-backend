@@ -2,10 +2,13 @@
 
 class UserController < SecuredController
   skip_before_action :authorize_user, only: %i[create]
-  before_action :check_is_admin?, only: %i[list_users destroy]
+  before_action :check_is_admin?, only: %i[index destroy]
 
   def index
-    json_response({ user: UserDetails.for(current_user) })
+    users_list = User.all.map do |user|
+      UserDetails.for(user)
+    end
+    json_response({ users: users_list }, :ok)
   end
 
   def create
@@ -14,11 +17,8 @@ class UserController < SecuredController
     json_response({ message: 'Created Successfully' }, :ok)
   end
 
-  def list_users
-    users_list = User.all.map do |user|
-      UserDetails.for(user)
-    end
-    json_response({ users: users_list }, :ok)
+  def show
+    json_response({ user: UserDetails.for(current_user) })
   end
 
   def update
