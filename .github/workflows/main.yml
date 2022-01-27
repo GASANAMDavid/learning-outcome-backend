@@ -29,12 +29,12 @@ jobs:
       - name: Set up Ruby
         uses: actions/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
         with:
-          ruby-version: 3.0.2
+          ruby-version: 3.0.1
       - name: Install dependencies
         run: |
           sudo apt update
           sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
-          gem install bundler -v '2.2.24'
+          gem install bundler -v '2.3.6'
           bundle install --jobs 4 --retry 3
       - name: Setup test database
         env:
