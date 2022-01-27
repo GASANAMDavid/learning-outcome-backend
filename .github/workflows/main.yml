@@ -27,10 +27,15 @@ jobs:
         with:
           node-version: 15.14.0
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: actions/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
         with:
           ruby-version: 3.0.2
-          bundler-cache: true
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
+          gem install bundler -v '2.2.24'
+          bundle install --jobs 4 --retry 3
       - name: Setup test database
         env:
           RAILS_ENV: test
