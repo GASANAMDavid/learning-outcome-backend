@@ -46,7 +46,7 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(Services::AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'responds with a list of all users' do
@@ -79,7 +79,7 @@ RSpec.describe UserController, type: :controller do
     let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
+      allow(Services::AuthorizationService).to receive(:extract_user_email).and_return(user.email)
     end
 
     it 'updates user attributes' do
@@ -92,7 +92,7 @@ RSpec.describe UserController, type: :controller do
   describe 'GET /user/show' do
     let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
+      allow(Services::AuthorizationService).to receive(:extract_user_email).and_return(user.email)
     end
 
     it 'responds with the current user details' do
@@ -117,7 +117,7 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(Services::AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'deletes a user' do
@@ -132,7 +132,7 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(Services::AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'updates the user information' do

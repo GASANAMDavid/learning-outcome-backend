@@ -10,9 +10,9 @@ RSpec.describe InitialMatrixWorker, type: :worker do
   end
 
   it 'delegates initialization to MatrixInitializationService', :sidekiq_inline do
-    allow(MatrixInitializationService).to receive(:call).with(user_id)
+    allow(Services::MatrixInitializationService).to receive(:call).with(user_id)
     described_class.perform_async(user_id)
-    expect(MatrixInitializationService).to have_received(:call).with(user_id)
+    expect(Services::MatrixInitializationService).to have_received(:call).with(user_id)
   end
 
   it 'retryable once', :sidekiq_inline do

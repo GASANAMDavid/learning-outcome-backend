@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AuthorizationService do
+RSpec.describe Services::AuthorizationService do
   let(:token) { 'abcd123' }
   let(:headers) { { 'Authorization' => "Bearer #{token}" } }
   let!(:user) { create(:user) }

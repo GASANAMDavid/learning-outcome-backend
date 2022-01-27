@@ -9,7 +9,7 @@ RSpec.describe RolesController, type: :controller do
     let(:user) { create(:user, role: apprentice) }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
+      allow(Services::AuthorizationService).to receive(:extract_user_email).and_return(user.email)
     end
 
     it 'should return available roles' do

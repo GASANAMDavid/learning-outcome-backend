@@ -19,13 +19,13 @@ class JsonWebToken
   def self.jwks_hash
     jwks_keys = Rails.application.credentials.jwks
     jwks_keys
-      .map do |k|
+      .to_h do |k|
       [
         k[:kid],
         OpenSSL::X509::Certificate.new(
           Base64.decode64(k[:x5c])
         ).public_key
       ]
-    end.to_h
+    end
   end
 end

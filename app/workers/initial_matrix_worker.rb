@@ -7,6 +7,6 @@ class InitialMatrixWorker
   sidekiq_options retry: 1
 
   def perform(user_id)
-    MatrixInitializationService.call(user_id)
+    Services::MatrixInitializationService.call(user_id)
   end
 end
