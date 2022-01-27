@@ -29,13 +29,8 @@ jobs:
       - name: Set up Ruby
         uses: actions/setup-ruby@v1
         with:
+          ruby-version: 3.0.2
           bundler-cache: true
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
-          gem install bundler
-          bundle install --jobs 4 --retry 3
       - name: Setup test database
         env:
           RAILS_ENV: test
