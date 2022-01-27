@@ -41,41 +41,6 @@ RSpec.describe UserController, type: :controller do
   end
 
   describe 'GET /index' do
-    let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
-    before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
-    end
-
-    it 'responds with the current user' do
-      get :index
-      expect(response.parsed_body).to eq({
-                                           'user' => {
-                                             'id' => user.id,
-                                             'first_name' => user.first_name,
-                                             'last_name' => user.last_name,
-                                             'email' => user.email,
-                                             'role' => { 'id' => user.role_id, 'admin' => user.admin?,
-                                                         'name' => user.role.name }
-                                           }
-                                         })
-    end
-  end
-
-  describe 'PATCH /update' do
-    let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
-
-    before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
-    end
-
-    it 'updates user attributes' do
-      patch :update, params: { id: user.id, user: { first_name: 'Innocent' } }
-      user.reload
-      expect(user.first_name).to eq('Innocent')
-    end
-  end
-
-  describe 'GET /user/list_users' do
     let!(:apprentice) { create(:user) }
     let(:admin_role) { create(:role, name: 'admin') }
     let!(:admin_user) { create(:user, role: admin_role) }
@@ -85,7 +50,7 @@ RSpec.describe UserController, type: :controller do
     end
 
     it 'responds with a list of all users' do
-      get :list_users
+      get :index
       expect(response.parsed_body).to eq(
         {
           'users' => [{
@@ -107,6 +72,41 @@ RSpec.describe UserController, type: :controller do
           }]
         }
       )
+    end
+  end
+
+  describe 'PATCH /update' do
+    let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
+
+    before do
+      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
+    end
+
+    it 'updates user attributes' do
+      patch :update, params: { id: user.id, user: { first_name: 'Innocent' } }
+      user.reload
+      expect(user.first_name).to eq('Innocent')
+    end
+  end
+
+  describe 'GET /user/show' do
+    let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
+    before do
+      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
+    end
+
+    it 'responds with the current user details' do
+      get :show
+      expect(response.parsed_body).to eq({
+                                           'user' => {
+                                             'id' => user.id,
+                                             'first_name' => user.first_name,
+                                             'last_name' => user.last_name,
+                                             'email' => user.email,
+                                             'role' => { 'id' => user.role_id, 'admin' => user.admin?,
+                                                         'name' => user.role.name }
+                                           }
+                                         })
     end
   end
   describe 'DELETE /user' do
