@@ -4,7 +4,7 @@ on: push
 jobs:
   verify:
     name: Build
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     services:
       postgres:
