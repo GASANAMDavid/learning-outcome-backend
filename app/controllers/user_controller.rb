@@ -21,6 +21,13 @@ class UserController < SecuredController
     json_response({ user: UserDetails.for(current_user) })
   end
 
+  def add_user
+    Services::CreateAuth0User.create(user_params)
+    new_user = User.create!(user_params)
+    InitialMatrixWorker.perform_async(new_user.id)
+    json_response({ message: 'Created Successfully' })
+  end
+
   def update
     check_is_admin? if current_user.id != params[:id].to_i
     user = User.find(params[:id])
