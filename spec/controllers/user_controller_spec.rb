@@ -46,7 +46,7 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(Services::Authorization).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'responds with a list of all users' do
@@ -79,7 +79,7 @@ RSpec.describe UserController, type: :controller do
     let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
+      allow(Services::Authorization).to receive(:extract_user_email).and_return(user.email)
     end
 
     it 'updates user attributes' do
@@ -92,7 +92,7 @@ RSpec.describe UserController, type: :controller do
   describe 'GET /user/show' do
     let!(:user) { create(:user, email: 'janedoe2021@gmail.com') }
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(user.email)
+      allow(Services::Authorization).to receive(:extract_user_email).and_return(user.email)
     end
 
     it 'responds with the current user details' do
@@ -117,10 +117,11 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(Services::Authorization).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'deletes a user' do
+      allow(Services::DeleteAuth0User).to receive(:destroy)
       expect { delete :destroy, params: { id: apprentice1.id } }.to change { User.count }.by(-1)
     end
   end
@@ -132,13 +133,32 @@ RSpec.describe UserController, type: :controller do
     let!(:admin_user) { create(:user, role: admin_role) }
 
     before do
-      allow(AuthorizationService).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(Services::Authorization).to receive(:extract_user_email).and_return(admin_user.email)
     end
 
     it 'updates the user information' do
       patch :update, params: { id: apprentice1.id, user: { first_name: 'James' } }
       apprentice1.reload
       expect(apprentice1.first_name).to eq('James')
+    end
+  end
+
+  describe 'POST /user/add_user' do
+    let(:apprentice_role) { create(:role, name: 'apprentice') }
+    let(:admin_role) { create(:role, name: 'admin') }
+    let!(:admin_user) { create(:user, role: admin_role) }
+    let(:user_params) do
+      { user: { email: 'gmdavid59@gmail.com', last_name: 'Manzi', first_name: 'David',
+                role_id: apprentice_role.id } }
+    end
+
+    before do
+      allow(Services::Authorization).to receive(:extract_user_email).and_return(admin_user.email)
+      allow(Services::CreateAuth0User).to receive(:create)
+    end
+
+    it 'registers a new user' do
+      expect { post :add_user, params: user_params }.to change { User.count }.by(1)
     end
   end
 end

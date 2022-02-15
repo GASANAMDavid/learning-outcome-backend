@@ -2,7 +2,7 @@
 
 class UserController < SecuredController
   skip_before_action :authorize_user, only: %i[create]
-  before_action :check_is_admin?, only: %i[index destroy]
+  before_action :check_is_admin?, only: %i[index add_user destroy]
 
   def index
     users_list = User.all.map do |user|
@@ -21,6 +21,13 @@ class UserController < SecuredController
     json_response({ user: UserDetails.for(current_user) })
   end
 
+  def add_user
+    Services::CreateAuth0User.create(user_params)
+    new_user = User.create!(user_params)
+    InitialMatrixWorker.perform_async(new_user.id)
+    json_response({ message: 'Created Successfully' })
+  end
+
   def update
     check_is_admin? if current_user.id != params[:id].to_i
     user = User.find(params[:id])
@@ -29,7 +36,9 @@ class UserController < SecuredController
 
   def destroy
     user = User.find(params[:id])
+    Services::DeleteAuth0User.destroy(user.email)
     user.destroy
+    json_response({ message: 'Deleted Successfully' })
   end
 
   private

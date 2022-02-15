@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :history, only: %i[index]
   resources :roles, only: %i[index]
   get '/user/show', to: 'user#show'
+  post '/user/add_user', to: 'user#add_user'
   resources :user, only: %i[index create destroy update]
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe MatrixInitializationService do
+RSpec.describe Services::MatrixInitialization do
   let(:theme) { create(:theme) }
   let(:apprenticeship_level) { create(:apprenticeship_level) }
   let!(:skill) { create(:skill, theme: theme, apprenticeship_level: apprenticeship_level) }
