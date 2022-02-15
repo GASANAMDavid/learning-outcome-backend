@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Services
-  class AuthorizationService
+  class Authorization
     AUTHORIZATION_HEADER = 'Authorization'
     CLAIM_NAMESPACE = 'http://localhost:3000/'
 

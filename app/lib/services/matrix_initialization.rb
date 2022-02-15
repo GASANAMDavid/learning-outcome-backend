@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Services
-  class MatrixInitializationService
+  class MatrixInitialization
     def self.call(user_id)
       initial_matrix = LearningOutcomesMatrix.create(user_id: user_id)
       Skill.order(:id).all.each do |skill|
